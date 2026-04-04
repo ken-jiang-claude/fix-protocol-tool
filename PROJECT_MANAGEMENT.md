@@ -12,12 +12,13 @@
 ## Table of Contents
 1. [Business Justification](#1-business-justification)
 2. [Return on Investment (ROI)](#2-return-on-investment-roi)
-3. [Definition of Ready](#3-definition-of-ready)
-4. [Definition of Done](#4-definition-of-done)
-5. [Milestones](#5-milestones)
-6. [Testing Plan](#6-testing-plan)
-7. [Software SDLC](#7-software-sdlc)
-8. [Gantt Chart](#8-gantt-chart)
+3. [RACI Matrix](#3-raci-matrix)
+4. [Definition of Ready](#4-definition-of-ready)
+5. [Definition of Done](#5-definition-of-done)
+6. [Milestones](#6-milestones)
+7. [Testing Plan](#7-testing-plan)
+8. [Software SDLC](#8-software-sdlc)
+9. [Gantt Chart](#9-gantt-chart)
 
 ---
 
@@ -100,7 +101,82 @@ At $600/year cost and $18,000/year savings, the tool pays for itself in **less t
 
 ---
 
-## 3. Definition of Ready
+## 3. RACI Matrix
+
+### Roles
+
+| Role | Description |
+|---|---|
+| **PO** — Project Owner | Ken Jiang — accountable for the product vision, priorities, and acceptance |
+| **DEV** — Developer | Engineer building and maintaining the tool |
+| **SE** — Senior Engineer | FIX subject matter expert providing technical guidance |
+| **OPS** — Operations / Support | End users who troubleshoot FIX incidents day-to-day |
+| **MGT** — Management | Sponsors who fund and approve the project |
+| **USR** — End Users | Developers and support staff using the tool |
+
+### RACI Key
+- **R** — Responsible (does the work)
+- **A** — Accountable (owns the outcome, signs off)
+- **C** — Consulted (provides input before decisions)
+- **I** — Informed (kept up to date)
+
+### RACI Table
+
+| Activity | PO | DEV | SE | OPS | MGT | USR |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **PLANNING** | | | | | | |
+| Define business requirements | A | C | C | C | C | I |
+| Approve project scope | A | I | C | I | C | I |
+| Technology stack selection | C | A | C | I | I | I |
+| Define success metrics / KPIs | A | C | C | C | R | I |
+| **DESIGN** | | | | | | |
+| UI/UX wireframe design | A | R | I | C | I | C |
+| System prompt design (FIX knowledge) | C | R | A | C | I | I |
+| API contract design | C | A | C | I | I | I |
+| Database schema design | C | A | C | I | I | I |
+| **DEVELOPMENT** | | | | | | |
+| Backend development (Flask, API) | I | A/R | C | I | I | I |
+| Frontend development (UI, Builder) | I | A/R | I | C | I | C |
+| Claude AI integration | I | A/R | C | I | I | I |
+| FIX workflow content (21 workflows) | C | R | A | C | I | I |
+| Troubleshoot mode logic | C | R | A | C | I | C |
+| Conversation history (SQLite) | I | A/R | I | I | I | I |
+| **TESTING** | | | | | | |
+| Write unit tests | I | A/R | C | I | I | I |
+| Execute integration tests | I | A/R | C | I | I | I |
+| User acceptance testing (UAT) | A | C | C | R | I | R |
+| Security review (API key, secrets) | A | R | C | I | I | I |
+| Performance testing | C | A/R | I | I | I | I |
+| **DEPLOYMENT** | | | | | | |
+| GitHub repository setup | I | A/R | I | I | I | I |
+| Render.com deployment configuration | I | A/R | I | I | I | I |
+| Environment variable management | A | R | I | I | I | I |
+| Production go-live approval | A | C | C | I | C | I |
+| **DOCUMENTATION** | | | | | | |
+| User manual (FIX learning.md) | A | R | C | C | I | I |
+| Project management document | A | R | C | I | C | I |
+| Release notes | C | A/R | I | I | I | I |
+| **MAINTENANCE & OPERATIONS** | | | | | | |
+| Monitor API usage and costs | A | R | I | I | I | I |
+| Incident response (app downtime) | A | R | C | I | I | I |
+| Feature enhancement prioritisation | A | C | C | C | C | R |
+| Dependency / security updates | C | A/R | C | I | I | I |
+| User feedback collection | A | C | I | R | I | R |
+
+### RACI Summary by Role
+
+| Role | Primary Responsibilities |
+|---|---|
+| **Project Owner (PO)** | Accountable for scope, priorities, go-live decisions, and success metrics |
+| **Developer (DEV)** | Responsible for all technical build, testing, deployment, and maintenance |
+| **Senior Engineer (SE)** | Accountable for FIX protocol accuracy in workflows, prompts, and content |
+| **Operations / Support (OPS)** | Consulted on troubleshooting requirements; performs UAT; collects user feedback |
+| **Management (MGT)** | Consulted on business requirements and ROI; informed of milestones and costs |
+| **End Users (USR)** | Consulted on UI/UX; performs UAT; primary source of feature feedback |
+
+---
+
+## 4. Definition of Ready
 
 A user story or feature is **ready to be worked on** when all of the following criteria are met:
 
@@ -126,7 +202,7 @@ A user story or feature is **ready to be worked on** when all of the following c
 
 ---
 
-## 4. Definition of Done
+## 5. Definition of Done
 
 A feature or story is **done** when all of the following are true:
 
@@ -160,7 +236,7 @@ A feature or story is **done** when all of the following are true:
 
 ---
 
-## 5. Milestones
+## 6. Milestones
 
 | # | Milestone | Description | Target Date | Status |
 |---|---|---|---|---|
@@ -175,7 +251,7 @@ A feature or story is **done** when all of the following are true:
 
 ---
 
-## 6. Testing Plan
+## 7. Testing Plan
 
 ### Test Levels
 
@@ -234,7 +310,7 @@ A feature or story is **done** when all of the following are true:
 
 ---
 
-## 7. Software SDLC
+## 8. Software SDLC
 
 This project follows an **Agile / iterative SDLC** model with short sprints.
 
@@ -323,7 +399,7 @@ This project follows an **Agile / iterative SDLC** model with short sprints.
 
 ---
 
-## 8. Gantt Chart
+## 9. Gantt Chart
 
 ```mermaid
 gantt
@@ -366,4 +442,4 @@ gantt
 
 ---
 
-*Document version 1.0 | April 2026 | Ken Jiang*
+*Document version 1.1 | April 2026 | Ken Jiang*
