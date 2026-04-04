@@ -1,0 +1,1 @@
+A Fintech professional needs to know about eh Financial Information Exchange protocol.  The Fintech professional needs to support maket data, trading workflows, and provide the troubleshooting service for FIX connectivity erros. Use FIXimate as the FIX protocol.
