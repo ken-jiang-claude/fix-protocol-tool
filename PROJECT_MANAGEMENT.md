@@ -16,9 +16,10 @@
 4. [Definition of Ready](#4-definition-of-ready)
 5. [Definition of Done](#5-definition-of-done)
 6. [Milestones](#6-milestones)
-7. [Testing Plan](#7-testing-plan)
-8. [Software SDLC](#8-software-sdlc)
-9. [Gantt Chart](#9-gantt-chart)
+7. [Feature Prioritisation — RICE Model](#7-feature-prioritisation--rice-model)
+8. [Testing Plan](#8-testing-plan)
+9. [Software SDLC](#9-software-sdlc)
+10. [Gantt Chart](#10-gantt-chart)
 
 ---
 
@@ -52,6 +53,49 @@ An AI-powered, browser-based tool that provides instant FIX protocol guidance, w
 | Senior Engineers | Secondary users | Reduced escalation burden |
 | Management | Sponsor | Cost reduction and risk mitigation |
 | Clients / Counterparties | Indirect beneficiaries | Faster FIX connectivity resolution |
+
+### Expected Outcomes
+
+Outcomes are organised across three dimensions: **People**, **Process**, and **Business** — aligned to the tool's core purpose.
+
+#### People Outcomes
+| Outcome | Baseline (Before) | Target (After) | Timeframe |
+|---|---|---|---|
+| Junior engineer independently resolves FIX incidents | Requires escalation ~80% of the time | Resolves independently 70% of the time | 3 months post-launch |
+| Onboarding time to FIX productivity | 3 months to handle first FIX issue alone | 4 weeks | First cohort of new hires |
+| Senior engineer time spent on FIX escalations | ~8 hrs/week answering junior queries | < 3 hrs/week | 2 months post-launch |
+| Staff confidence with FIX protocol | Self-reported: 3/10 average | Self-reported: 7/10 average | 6 months post-launch |
+
+#### Process Outcomes
+| Outcome | Baseline (Before) | Target (After) | Timeframe |
+|---|---|---|---|
+| Mean Time to Resolve (MTTR) FIX incidents | ~3 hours per incident | < 1 hour per incident | 3 months post-launch |
+| FIX incident escalation rate | ~10 escalations/month | < 6 escalations/month | 3 months post-launch |
+| Time to identify correct FIX tag / message type | ~45 mins (manual FIXimate search) | < 5 mins (AI-assisted) | Immediate on launch |
+| FIX message validation before sending | Ad hoc, error-prone | Structured builder + AI validation | Immediate on launch |
+| Knowledge documented and searchable | Locked in senior engineers' heads | Encoded in AI, accessible 24/7 | Immediate on launch |
+
+#### Business Outcomes
+| Outcome | Baseline (Before) | Target (After) | Timeframe |
+|---|---|---|---|
+| Annual cost of FIX incident resolution | ~$18,000/year in engineer hours | < $9,000/year | 6 months post-launch |
+| Client FIX connectivity resolution SLA | 4 hours average | 1 hour average | 3 months post-launch |
+| Trading downtime due to FIX errors | ~2 hrs/month unplanned downtime | < 30 mins/month | 6 months post-launch |
+| Tool adoption across FIX team | 0% | 80% monthly active users | 2 months post-launch |
+| Engineer hours saved per month | 0 hrs | 20+ hrs/month | 1 month post-launch |
+
+#### Outcome Measurement Framework
+
+```
+MEASURE → TRACK → REPORT → ITERATE
+
+Monthly review cadence:
+  1. Pull JIRA ticket data  → MTTR, escalation rate
+  2. Pull Render access logs → Monthly active users
+  3. Pull Anthropic API usage → Cost per resolved incident
+  4. Quarterly staff survey   → Confidence score, qualitative feedback
+  5. Management report        → ROI actuals vs targets
+```
 
 ---
 
@@ -251,7 +295,98 @@ A feature or story is **done** when all of the following are true:
 
 ---
 
-## 7. Testing Plan
+## 7. Feature Prioritisation — RICE Model
+
+### What is RICE?
+
+RICE is a prioritisation framework that scores each feature request using four factors, ensuring enhancements are chosen based on value to outcomes — not gut feel or loudest voice.
+
+```
+RICE Score = (Reach × Impact × Confidence) / Effort
+```
+
+| Factor | Definition | Scale |
+|---|---|---|
+| **Reach** | How many users benefit per month | Number of users (e.g. 10, 50, 200) |
+| **Impact** | How much it improves the outcome per user | 3 = Massive, 2 = High, 1 = Medium, 0.5 = Low, 0.25 = Minimal |
+| **Confidence** | How certain we are about Reach and Impact estimates | 100% = High, 80% = Medium, 50% = Low |
+| **Effort** | Total person-months of work required | Person-months (e.g. 0.5, 1, 2) |
+
+### Outcome Alignment
+
+Each feature is tagged to the Outcome it primarily drives:
+
+| Tag | Outcome |
+|---|---|
+| 🟢 **MTTR** | Reduces Mean Time to Resolve FIX incidents |
+| 🔵 **ADOPT** | Increases tool adoption and daily usage |
+| 🟡 **LEARN** | Accelerates FIX learning and staff upskilling |
+| 🟠 **CLIENT** | Improves client / counterparty experience |
+| 🔴 **COST** | Reduces operational cost or API spend |
+
+---
+
+### RICE Prioritisation Table
+
+| # | Feature Request | Reach | Impact | Confidence | Effort | **RICE Score** | Outcome Tag | Priority |
+|---|---|:---:|:---:|:---:|:---:|:---:|---|---|
+| 1 | **FIX Message Log Parser** — paste a raw FIX log; AI parses and explains each message | 40 | 3 | 80% | 1.0 | **96** | 🟢 MTTR | 🥇 High |
+| 2 | **User Authentication / Login** — personal accounts so each user has private history | 50 | 2 | 80% | 2.0 | **40** | 🔵 ADOPT | 🥇 High |
+| 3 | **Saved FIX Message Templates** — save frequently used message structures in the builder | 30 | 2 | 100% | 0.5 | **120** | 🟢 MTTR | 🥇 High |
+| 4 | **FIX Tag Search** — type a tag number or name; get instant definition and usage | 50 | 2 | 100% | 0.5 | **200** | 🟡 LEARN | 🥇 High |
+| 5 | **Error Code Quick Reference** — searchable table of all FIX reject reason codes | 40 | 2 | 100% | 0.5 | **160** | 🟢 MTTR | 🥇 High |
+| 6 | **Session Diff Tool** — compare two FIX sessions side by side to spot config differences | 20 | 3 | 80% | 1.5 | **32** | 🟢 MTTR | 🥈 Medium |
+| 7 | **Multi-user Support** — teams share one instance with user roles | 50 | 2 | 80% | 3.0 | **27** | 🔵 ADOPT | 🥈 Medium |
+| 8 | **Export Chat to PDF** — download conversation as a formatted PDF report | 30 | 1 | 100% | 0.5 | **60** | 🟠 CLIENT | 🥈 Medium |
+| 9 | **FIX Version Comparison** — side-by-side tag differences between FIX 4.2, 4.4, 5.0 SP2 | 25 | 2 | 80% | 1.0 | **40** | 🟡 LEARN | 🥈 Medium |
+| 10 | **Sequence Number Calculator** — tool to calculate correct resend range from logs | 20 | 3 | 80% | 0.5 | **96** | 🟢 MTTR | 🥇 High |
+| 11 | **Onboarding Quiz Mode** — test FIX knowledge with scored multiple-choice questions | 15 | 2 | 80% | 1.5 | **16** | 🟡 LEARN | 🥉 Low |
+| 12 | **Usage Analytics Dashboard** — show most asked topics, MTTR trend, adoption stats | 10 | 1 | 80% | 1.0 | **8** | 🔴 COST | 🥉 Low |
+| 13 | **Slack / Teams Notification** — alert ops team when a new troubleshoot session starts | 15 | 1 | 50% | 1.0 | **8** | 🟠 CLIENT | 🥉 Low |
+| 14 | **Dark / Light Theme Toggle** — UI theme preference | 50 | 0.25 | 100% | 0.25 | **50** | 🔵 ADOPT | 🥈 Medium |
+
+### RICE Score Calculation Examples
+
+**Feature 4 — FIX Tag Search:**
+```
+RICE = (50 × 2 × 100%) / 0.5 = 200  ← Highest priority
+```
+
+**Feature 5 — Error Code Quick Reference:**
+```
+RICE = (40 × 2 × 100%) / 0.5 = 160
+```
+
+**Feature 3 — Saved FIX Message Templates:**
+```
+RICE = (30 × 2 × 100%) / 0.5 = 120
+```
+
+### Recommended Development Sequence (by RICE Score)
+
+```
+Sprint 1 (May 2026)
+  ├── Feature 4: FIX Tag Search             RICE: 200  🟡 LEARN
+  └── Feature 5: Error Code Quick Reference RICE: 160  🟢 MTTR
+
+Sprint 2 (May–Jun 2026)
+  ├── Feature 3: Saved FIX Message Templates RICE: 120  🟢 MTTR
+  └── Feature 1: FIX Message Log Parser      RICE: 96   🟢 MTTR
+
+Sprint 3 (Jun 2026)
+  ├── Feature 10: Sequence Number Calculator RICE: 96   🟢 MTTR
+  └── Feature 8:  Export Chat to PDF         RICE: 60   🟠 CLIENT
+
+Sprint 4 (Jun–Jul 2026)
+  ├── Feature 2:  User Authentication        RICE: 40   🔵 ADOPT
+  └── Feature 9:  FIX Version Comparison     RICE: 40   🟡 LEARN
+```
+
+> **Note:** RICE scores are reviewed and recalibrated monthly based on actual usage data and user feedback. Features with low RICE scores are not discarded — they are deferred until a higher-priority sprint slot opens.
+
+---
+
+## 8. Testing Plan
 
 ### Test Levels
 
@@ -310,7 +445,7 @@ A feature or story is **done** when all of the following are true:
 
 ---
 
-## 8. Software SDLC
+## 9. Software SDLC
 
 This project follows an **Agile / iterative SDLC** model with short sprints.
 
@@ -399,7 +534,7 @@ This project follows an **Agile / iterative SDLC** model with short sprints.
 
 ---
 
-## 9. Gantt Chart
+## 10. Gantt Chart
 
 ```mermaid
 gantt
@@ -442,4 +577,4 @@ gantt
 
 ---
 
-*Document version 1.1 | April 2026 | Ken Jiang*
+*Document version 1.2 | April 2026 | Ken Jiang*
