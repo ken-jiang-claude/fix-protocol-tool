@@ -1,7 +1,7 @@
 """
 FIX Protocol Tool — Bloomberg LP Theme
 Run: python generate_deck_bloomberg.py
-Output: FIX_Protocol_Tool_Deck_Bloomberg.pptx
+Output: FIX_Protocol_Tool_Deck_BBG.pptx
 
 Bloomberg palette:
   BG_BLACK   #0A0A0A  - primary background
