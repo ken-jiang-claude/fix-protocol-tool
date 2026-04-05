@@ -90,6 +90,29 @@ Render.com auto-deploys on every push to `main`. No manual deploy step needed.
 
 ---
 
+## Deck Generation (generate_deck.py)
+
+Generates `FIX_Protocol_Tool_Deck.pptx` — 11 slides, dark navy theme.
+
+**Run:**
+```bash
+python generate_deck.py
+```
+
+**Theme colours:** Navy `#0A1628`, Accent blue `#1E90FF`, White `#FFFFFF`, Light grey `#E8EDF2`
+
+**Helper functions:**
+- `add_rect()` — coloured rectangle shape
+- `add_text()` — text box with font/colour control
+- `card()` — info card (title + body)
+- `slide_title()` — consistent slide heading
+- `section_header()` — full-bleed section divider
+- `bullet_box()` — bulleted list box
+
+**Slides (in order):** Title, Agenda, Problem, Solution, Key Features, ROI/Business Value, RICE Roadmap, Architecture, PM Governance, Live Demo, Thank You
+
+---
+
 ## Roadmap (next sprints)
 
 1. FIX Tag Search (RICE: 200) — May 2026
