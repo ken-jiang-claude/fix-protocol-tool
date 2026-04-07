@@ -144,6 +144,20 @@
     #validate-btn { border-color: var(--accent) !important; color: var(--accent) !important; font-weight: 600; }
     #validate-btn:hover { background: var(--accent) !important; color: #fff !important; }
 
+    /* ── Parse panel ── */
+    #parse-panel { background: var(--surface); border-top: 2px solid var(--success); padding: 16px; display: none; flex-direction: column; gap: 10px; }
+    #parse-panel.visible { display: flex; }
+    .parse-header { display: flex; align-items: center; gap: 8px; }
+    .parse-header h3 { font-size: 14px; font-weight: 600; color: var(--success); flex: 1; }
+    #parse-input { width: 100%; background: #010409; border: 1px solid var(--border); color: #7ee787; border-radius: 6px; padding: 10px 12px; font-family: 'Consolas', monospace; font-size: 12px; resize: vertical; min-height: 72px; }
+    #parse-input:focus { outline: none; border-color: var(--success); }
+    #parse-input::placeholder { color: var(--text-dim); font-family: inherit; }
+    .parse-actions { display: flex; gap: 8px; }
+    .parse-actions button { padding: 7px 14px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-size: 13px; cursor: pointer; }
+    .parse-actions button:hover { border-color: var(--success); color: var(--success); }
+    #parse-btn { border-color: var(--success) !important; color: var(--success) !important; font-weight: 600; }
+    #parse-btn:hover { background: var(--success) !important; color: #fff !important; }
+
     /* Welcome screen */
     .welcome { text-align: center; padding: 40px 20px; color: var(--text-dim); }
     .welcome h2 { font-size: 18px; color: var(--text); margin-bottom: 8px; }
@@ -266,6 +280,19 @@
       </div>
     </div>
 
+    <!-- Parse FIX Message panel -->
+    <div id="parse-panel">
+      <div class="parse-header">
+        <h3>&#128269; Parse FIX Message</h3>
+        <button class="action-btn" onclick="toggleParser()">Close</button>
+      </div>
+      <textarea id="parse-input" placeholder="Paste a raw FIX message here, e.g.:&#10;8=FIX.4.4|9=148|35=D|49=CLIENT|56=BROKER|34=1|52=20240101-09:00:00|11=ORD001|55=AAPL|54=1|38=100|40=2|44=150.00|10=123|"></textarea>
+      <div class="parse-actions">
+        <button id="parse-btn" onclick="parseMessage()">Parse &amp; Explain</button>
+        <button onclick="document.getElementById('parse-input').value=''">Clear</button>
+      </div>
+    </div>
+
     <!-- FIX Message Builder panel -->
     <div id="builder-panel">
       <div class="builder-header">
@@ -347,6 +374,7 @@
     <div class="input-bar">
       <textarea id="user-input" rows="1" placeholder="Ask about FIX protocol..." onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
       <div class="input-actions">
+        <button class="action-btn" onclick="toggleParser()" title="Parse a FIX message">&#128269; Parse FIX</button>
         <button class="action-btn" onclick="toggleBuilder()" title="FIX Message Builder">&#9881; Builder</button>
         <button id="send-btn" onclick="sendMessage()">Send</button>
       </div>
@@ -526,9 +554,32 @@ function autoResize(el) {
   el.style.height = Math.min(el.scrollHeight, 120) + 'px';
 }
 
+// ── FIX Parser ─────────────────────────────────────────────────────────────
+function toggleParser() {
+  const panel = document.getElementById('parse-panel');
+  const isOpening = !panel.classList.contains('visible');
+  panel.classList.toggle('visible');
+  // close builder if opening parser
+  if (isOpening) document.getElementById('builder-panel').classList.remove('visible');
+  if (isOpening) setTimeout(() => document.getElementById('parse-input').focus(), 50);
+}
+
+function parseMessage() {
+  const raw = document.getElementById('parse-input').value.trim();
+  if (!raw) return;
+  const prompt = `Please parse and explain this FIX message. For each tag, show the tag number, field name, value, and what it means in context. Identify the message type and summarise what this message represents:\n\n\`\`\`\n${raw}\n\`\`\``;
+  document.getElementById('parse-panel').classList.remove('visible');
+  document.getElementById('parse-input').value = '';
+  document.getElementById('user-input').value = prompt;
+  sendMessage();
+}
+
 // ── FIX Builder ────────────────────────────────────────────────────────────
 function toggleBuilder() {
-  document.getElementById('builder-panel').classList.toggle('visible');
+  const panel = document.getElementById('builder-panel');
+  const isOpening = !panel.classList.contains('visible');
+  panel.classList.toggle('visible');
+  if (isOpening) document.getElementById('parse-panel').classList.remove('visible');
 }
 
 function addTagRow() {
