@@ -4,7 +4,12 @@
       "Bash(powershell.exe -Command ':*)",
       "Bash(powershell.exe -Command \"git status\")",
       "Bash(\"/c/Users/Taikary Jiang/AppData/Local/Programs/Python/Python312/python.exe\" -m pip install python-pptx)",
-      "Bash(\"/c/Users/Taikary Jiang/AppData/Local/Programs/Python/Python312/python.exe\" \"c:/Users/Taikary Jiang/FIX Protocol/generate_deck.py\")"
+      "Bash(\"/c/Users/Taikary Jiang/AppData/Local/Programs/Python/Python312/python.exe\" \"c:/Users/Taikary Jiang/FIX Protocol/generate_deck.py\")",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(pip install:*)",
+      "Bash(python3 -m pip install \"markitdown[pptx]\" Pillow)",
+      "Bash(python -m pip install \"markitdown[pptx]\" Pillow)",
+      "Bash(\"C:\\\\Users\\\\Taikary Jiang\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python312\\\\python.exe\" -m pip install \"markitdown[pptx]\" Pillow)"
     ]
   }
 }

@@ -32,14 +32,17 @@ AI-powered web app for learning and troubleshooting the FIX Protocol. Built as a
 | `web_app.py` | Main Flask app — routes, SSE streaming, SQLite history, API key resolution |
 | `templates/index.html` | Single-page frontend — sidebar, chat, troubleshoot mode, FIX message builder |
 | `fix_tool.py` | Original CLI version (not used in production) |
-| `generate_deck.py` | Generates `FIX_Protocol_Tool_Deck.pptx` (11 slides, dark navy theme) |
+| `generate_deck.py` | Generates deck (11 slides, dark navy theme) |
+| `generate_deck_bloomberg.py` | Generates Bloomberg-themed deck |
 | `Procfile` | gunicorn start command for Render.com |
 | `requirements.txt` | `anthropic>=0.89.0`, `flask>=3.1.0`, `gunicorn>=21.2.0` |
-| `ReadMe.md` | User manual |
-| `PROJECT_MANAGEMENT.md` | Full PM doc — business justification, ROI, RACI, RICE, milestones, SDLC, Gantt |
-| `PROJECT_STATUS.md` | 1-page RAG status + RAID log |
-| `Persona.md` | Source persona doc (reference only) |
-| `Trading Workflow.md` | Source workflow doc (reference only) |
+| `docs/ReadMe.md` | User manual |
+| `docs/PROJECT_MANAGEMENT.md` | Full PM doc — business justification, ROI, RACI, RICE, milestones, SDLC, Gantt |
+| `docs/PROJECT_STATUS.md` | 1-page RAG status + RAID log |
+| `docs/Persona.md` | Source persona doc (reference only) |
+| `docs/Trading Workflow.md` | Source workflow doc (reference only) |
+| `docs/FIX_Protocol_Tool_Deck.pptx` | Dark navy presentation deck |
+| `docs/FIX_Protocol_Tool_Deck_BBG.pptx` | Bloomberg-themed presentation deck |
 
 ---
 
